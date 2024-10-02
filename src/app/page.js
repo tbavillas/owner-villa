@@ -45,14 +45,13 @@ export default function Home() {
         }
         const json = await res.json();
         setData(json);
-        localStorage.removeItem("data");
       } catch (err) {
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
-
+    localStorage.removeItem("data");
     fetchData();
   }, []);
 
