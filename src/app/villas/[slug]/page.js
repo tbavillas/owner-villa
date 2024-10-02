@@ -14,6 +14,25 @@ export default function Villas({ params }) {
   const [showModal, setShowModal] = useState(false);
   // const [page, setPage] = useState(false);
   const router = useRouter();
+  function removeSpaces(str) {
+    if (str) {
+      // Check if str is not null or undefined
+      return str.replace(/\s+/g, "");
+    }
+    return str; // Return as is if it's null or undefined
+  }
+
+  if (typeof window !== "undefined") {
+    const local_s = removeSpaces(localStorage.getItem("data"));
+    if (local_s && params.slug) {
+      if (local_s == removeSpaces(params.slug)) {
+        console.log(true);
+      } else {
+        console.log(false);
+        router.push("/");
+      }
+    }
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,12 +52,6 @@ export default function Villas({ params }) {
       }
     };
     fetchData();
-    if (typeof window !== "undefined") {
-      if (localStorage.getItem("data") === params.slug) {
-      } else {
-        router.push("/");
-      }
-    }
   }, []);
 
   useEffect(() => {
