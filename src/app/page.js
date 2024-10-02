@@ -17,14 +17,6 @@ export default function Home() {
 
   const router = useRouter();
 
-  if (typeof window !== "undefined") {
-    // const local = localStorage.getItem("data");
-    // if (local) {
-    //   router.push(`/villas/${local}`);
-    // }
-    localStorage.removeItem("data");
-  }
-
   const handleForm = (e) => {
     e.preventDefault();
     if (username && password) {
@@ -53,6 +45,7 @@ export default function Home() {
         }
         const json = await res.json();
         setData(json);
+        localStorage.removeItem("data");
       } catch (err) {
         setError(err.message);
       } finally {
