@@ -12,10 +12,11 @@ export default function Villas({ params }) {
   const [errorVilla, setErrorVilla] = useState(null);
   const [modal, setModal] = useState(0);
   const [showModal, setShowModal] = useState(false);
+  // const [page, setPage] = useState(false);
   const router = useRouter();
 
   if (typeof window !== "undefined") {
-    if (localStorage.getItem("login") === params.slug) {
+    if (localStorage.getItem("data") === params.slug) {
     } else {
       router.push("/");
     }
@@ -44,7 +45,7 @@ export default function Villas({ params }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("https://www.thebaliagent.com/api/data-villa");
+        const res = await fetch("https://thebaliagent.com/api/data-villa");
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
         }
@@ -74,7 +75,7 @@ export default function Villas({ params }) {
   };
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (error) return <p>Error</p>;
   if (data.length === 0) {
     return (
       <h1 className="p-2 text-lg font-bold mb-4">
@@ -340,7 +341,7 @@ export default function Villas({ params }) {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    localStorage.removeItem("login");
+    localStorage.removeItem("data");
     router.push("/");
   };
 
@@ -641,6 +642,7 @@ export default function Villas({ params }) {
               </div>
             </div>
           </div>
+          {/* <div className="opacity-75 fixed inset-0 z-40 bg-black"></div> */}
         </>
       )}
     </main>

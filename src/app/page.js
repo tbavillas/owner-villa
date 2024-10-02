@@ -18,17 +18,18 @@ export default function Home() {
   const router = useRouter();
 
   if (typeof window !== "undefined") {
-    const local = localStorage.getItem("login");
-    if (local) {
-      router.push(`/villas/${local}`);
-    }
+    // const local = localStorage.getItem("data");
+    // if (local) {
+    //   router.push(`/villas/${local}`);
+    // }
+    localStorage.removeItem("data");
   }
 
   const handleForm = (e) => {
     e.preventDefault();
     if (username && password) {
       if (username == password) {
-        localStorage.setItem("login", password);
+        localStorage.setItem("data", password);
         router.push(`/villas/${password}`);
       } else {
         Swal.fire({
@@ -46,7 +47,7 @@ export default function Home() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const res = await fetch("https://www.thebaliagent.com/api/data-villa");
+        const res = await fetch("https://thebaliagent.com/api/data-villa");
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
         }
