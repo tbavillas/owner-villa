@@ -15,13 +15,6 @@ export default function Villas({ params }) {
   // const [page, setPage] = useState(false);
   const router = useRouter();
 
-  if (typeof window !== "undefined") {
-    if (localStorage.getItem("data") === params.slug) {
-    } else {
-      router.push("/");
-    }
-  }
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -40,6 +33,12 @@ export default function Villas({ params }) {
       }
     };
     fetchData();
+    if (typeof window !== "undefined") {
+      if (localStorage.getItem("data") === params.slug) {
+      } else {
+        router.push("/");
+      }
+    }
   }, []);
 
   useEffect(() => {
